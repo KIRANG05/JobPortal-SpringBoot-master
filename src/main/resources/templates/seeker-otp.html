@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Job Portal - Verify your account">
+    <meta name="keywords" content="otp verification, job portal, account verification">
+    <meta name="author" content="Job Portal">
+    <meta name="robots" content="index, follow">
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>Job Portal - OTP Verification</title>
+
+    <style>
+        :root {
+            --primary-color: #6b46c1;
+            --secondary-color: #e53e3e;
+            --dark-color: #1a202c;
+            --light-color: #f7fafc;
+            --gray-color: #edf2f7;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.7;
+            background: linear-gradient(rgba(26, 32, 44, 0.8), rgba(26, 32, 44, 0.8)),
+                url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .otp-container {
+            background: rgba(247, 250, 252, 0.98);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+        }
+
+        .otp-title {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+            text-transform: capitalize;
+            letter-spacing: -0.5px;
+            font-weight: 700;
+        }
+
+        .alert-message {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .success {
+            background-color: rgba(72, 187, 120, 0.2);
+            color: #2f855a;
+            border: 2px solid #48bb78;
+        }
+
+        .error {
+            background-color: rgba(245, 101, 101, 0.2);
+            color: #c53030;
+            border: 2px solid #f56565;
+        }
+
+        .otp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .otp-input {
+            padding: 1.5rem;
+            border: 3px solid var(--gray-color);
+            border-radius: 12px;
+            font-size: 1.3rem;
+            text-align: center;
+            letter-spacing: 10px;
+            transition: all 0.4s ease;
+            background-color: white;
+            color: var(--dark-color);
+        }
+
+        .otp-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 15px rgba(107, 70, 193, 0.3);
+        }
+
+        .submit-btn {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(229, 62, 62, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(2px);
+        }
+
+        .resend-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid transparent;
+            border-radius: 8px;
+        }
+
+        .resend-link:hover {
+            background-color: rgba(107, 70, 193, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+
+            .otp-container {
+                padding: 2rem;
+            }
+
+            .otp-title {
+                font-size: 2rem;
+            }
+
+            .otp-input {
+                font-size: 1.1rem;
+                letter-spacing: 8px;
+                padding: 1.2rem;
+            }
+
+            .submit-btn {
+                padding: 1.2rem;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="otp-container">
+        <h1 class="otp-title">Verify Your Account</h1>
+        
+        <div th:if="${session.success}" class="alert-message success">
+            <span th:text="${session.success}"></span>
+            <th:block th:text="${@messageRemover.remove()}"></th:block>
+        </div>
+        <div th:if="${session.error}" class="alert-message error">
+            <span th:text="${session.error}"></span>
+            <th:block th:text="${@messageRemover.remove()}"></th:block>
+        </div>
+
+        <form action="/jobseeker/otp" method="post" class="otp-form">
+            <input type="text" name="otp" class="otp-input" placeholder="Enter OTP" maxlength="6" required>
+            <input type="hidden" name="id" th:value="${id}">
+            <button type="submit" class="submit-btn">Verify OTP</button>
+        </form>
+
+        <a th:href="'/jobseeker/resend-otp/'+${id}" class="resend-link">Resend OTP</a>
+    </div>
+</body>
+</html>

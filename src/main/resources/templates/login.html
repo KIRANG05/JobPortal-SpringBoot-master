@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Job Portal - Find your dream job opportunities across various industries">
+  <meta name="keywords" content="jobs, career, employment, job search, job portal, hiring, job opportunities">
+  <meta name="author" content="Job Portal">
+  <meta name="robots" content="index, follow">
+
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <title>Job Portal - Login</title>
+
+  <style>
+    :root {
+      --primary-color: #6c63ff;
+      --secondary-color: #3f3d56;
+      --accent-color: #f50057;
+      --background-color: #f8f9fa;
+      --text-color: #2d3436;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+
+    .navbar {
+      background-color: var(--white);
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: var(--primary-color);
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-btn {
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .register-btn {
+      background-color: var(--primary-color);
+      color: var(--white);
+    }
+
+    .register-btn:hover {
+      background-color: #5652d6;
+      transform: translateY(-2px);
+    }
+
+    .login-btn {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .login-btn:hover {
+      background-color: var(--primary-color);
+      color: var(--white);
+    }
+
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-form {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 3rem;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .login-form h1 {
+      color: var(--primary-color);
+      margin-bottom: 2rem;
+      text-align: center;
+      font-size: 2.2rem;
+    }
+
+    .login-form input {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .login-form input:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+    }
+
+    .login-form button {
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .login-form button:hover {
+      background-color: #5652d6;
+      transform: translateY(-2px);
+    }
+
+    .alert-message {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      z-index: 1001;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    .success {
+      background-color: #00b894;
+      color: var(--white);
+    }
+
+    .error {
+      background-color: #ff7675;
+      color: var(--white);
+    }
+
+    .alert-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: inherit;
+      opacity: 0.8;
+    }
+
+    .alert-close:hover {
+      opacity: 1;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .footer {
+      background-color: var(--secondary-color);
+      color: var(--white);
+      padding: 2rem 5%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+    }
+
+    .footer-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+      .nav-buttons {
+        gap: 1rem;
+      }
+
+      .nav-btn {
+        padding: 0.7rem 1.5rem;
+      }
+
+      .login-form {
+        padding: 2rem;
+        margin: 1rem;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <a href="/" style="display: flex; align-items: center;">
+        <img src="/assets/favicon.png" alt="Job Portal Logo" style="width: 35px; height: 35px; margin-right: 12px;">
+        Job Portal
+      </a>
+    </div>
+    <div class="nav-buttons">
+      <a href="/login"><button class="nav-btn login-btn">Login</button></a>
+      <a href="/jobseeker/register"><button class="nav-btn register-btn">Register</button></a>
+    </div>
+  </nav>
+  <div th:if="${session.success}" class="alert-message success">
+    <span th:text="${session.success}"></span>
+    <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+    <th:block th:text="${@messageRemover.remove()}"></th:block>
+  </div>
+  <div th:if="${session.error}" class="alert-message error">
+    <span th:text="${session.error}"></span>
+    <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+    <th:block th:text="${@messageRemover.remove()}"></th:block>
+  </div>
+
+  <div class="login-container">
+    <div class="login-form">
+      <h1>Login</h1>
+      <form action="/login" method="post">
+        <input type="text" name="emph" placeholder="Email or Phone Number" />
+        <input type="password" name="password" placeholder="Password" />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="/about-us">About Us</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    setTimeout(function () {
+      const alertMessages = document.querySelectorAll('.alert-message');
+      alertMessages.forEach(message => {
+        message.style.display = 'none';
+      });
+    }, 2000);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Job Portal - Post a new job opportunity">
+    <meta name="keywords" content="post job, job listing, recruitment, hiring">
+    <meta name="author" content="Job Portal">
+    <meta name="robots" content="index, follow">
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>Job Portal - Update Job</title>
+
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #00b894;
+            --dark-color: #2d3436;
+            --light-color: #ffffff;
+            --accent-color: #fd79a8;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #dfe6e9;
+        }
+
+        .navbar {
+            background: var(--gradient);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light-color);
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+        }
+
+        .post-job-container {
+            min-height: 100vh;
+            background-color: #dfe6e9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .post-job-form {
+            background: var(--light-color);
+            padding: 3.5rem;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-job-form h1 {
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+            font-size: 2.3rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--dark-color);
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #b2bec3;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+            background-color: var(--light-color);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient);
+            color: var(--light-color);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+        }
+
+        .logout-btn {
+            background: var(--accent-color);
+            color: var(--light-color);
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: none;
+        }
+
+        .logout-btn:hover {
+            background: #e84393;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(253, 121, 168, 0.4);
+        }
+
+        .footer {
+            background: var(--dark-color);
+            color: var(--light-color);
+            padding: 2.5rem 5%;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .post-job-container {
+                padding: 7rem 1rem 3rem;
+            }
+
+            .post-job-form {
+                padding: 2rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .post-job-form h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/recruiter/home">
+                <img src="/assets/favicon.png" alt="Job Portal Logo" style="width: 35px; height: 35px; margin-right: 12px;">
+                Job Portal
+            </a>
+        </div>
+        <a href="/logout" class="logout-btn">Logout <i class="fas fa-sign-out-alt"></i></a>
+    </nav>
+
+    <div class="post-job-container">
+        <div class="post-job-form">
+            <h1>Post New Job</h1>
+            <form action="/recruiter/update-job" method="post">
+                <input type="hidden" name="id" th:value="${job.id}">
+                <div class="form-group">
+                    <label for="title">Job Role</label>
+                    <input type="text" name="role" th:value="${job.role}" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Job Description</label>
+                    <textarea name="description" id="description" required><th:block th:text="${job.description}"></th:block></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="skills">Required Skills</label>
+                    <input type="text" name="skills" id="skills" th:value="${job.skills}" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" name="location" th:value="${job.location}" id="location" required>
+                </div>
+                <div class="form-group">
+                    <label for="salary">CTC (Annual in LPA)</label>
+                    <input type="number" name="ctc" th:value="${job.ctc}" id="salary" required>
+                </div>
+                <div class="form-group">
+                    <label for="experience">Required Experience (Months)</label>
+                    <input type="number" name="experience" th:value="${job.experience}" id="experience" required>
+                </div>
+                <button type="submit" class="submit-btn">Update Job <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/about-us">About Us</a>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

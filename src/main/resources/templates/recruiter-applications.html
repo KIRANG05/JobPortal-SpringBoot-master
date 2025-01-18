@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Job Portal - Manage your job listings">
+    <meta name="keywords" content="job management, recruiter dashboard, job listings">
+    <meta name="author" content="Job Portal">
+    <meta name="robots" content="index, follow">
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>Job Portal - View Jobs</title>
+
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a8e6cf;
+            --dark-color: #2d3436;
+            --light-color: #ffffff;
+            --accent-color: #fd79a8;
+            --gradient: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background: var(--gradient);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light-color);
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: var(--light-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .content {
+            flex: 1;
+            padding: 8rem 5% 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .job-card {
+            background: var(--light-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .job-card h3 {
+            color: var(--dark-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .job-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .job-detail strong {
+            min-width: 120px;
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .edit-btn {
+            background: var(--gradient);
+            color: var(--light-color);
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--light-color);
+            padding: 0.7rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .footer {
+            background: var(--dark-color);
+            color: var(--light-color);
+            padding: 2rem 5%;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .alert-message {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            z-index: 1000;
+            animation: slideIn 0.5s ease-out;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .success {
+            background-color: rgba(46, 213, 115, 0.2);
+            color: #2ed573;
+            border: 1px solid #2ed573;
+        }
+
+        .error {
+            background-color: rgba(255, 71, 87, 0.2);
+            color: #ff4757;
+            border: 1px solid #ff4757;
+        }
+
+        .alert-close {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: inherit;
+            transition: transform 0.3s ease;
+        }
+
+        .alert-close:hover {
+            transform: rotate(90deg);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .job-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div th:if="${session.success}" class="alert-message success">
+        <span th:text="${session.success}"></span>
+        <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+        <th:block th:text="${@messageRemover.remove()}"></th:block>
+    </div>
+    <div th:if="${session.error}" class="alert-message error">
+        <span th:text="${session.error}"></span>
+        <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+        <th:block th:text="${@messageRemover.remove()}"></th:block>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/recruiter/home">
+                <img src="/assets/favicon.png" alt="Job Portal Logo" style="width: 35px; height: 35px; margin-right: 12px;">
+                Job Portal
+            </a>
+        </div>
+        <a href="/logout" class="logout-btn">Logout <i class="fas fa-sign-out-alt"></i></a>
+    </nav>
+
+    <div class="content">
+        <div class="jobs-grid">
+            <div class="job-card" th:each="job:${jobs}">
+                <h3 th:text="${job.role}">Role</h3>
+                <div class="job-detail">
+                    <strong>Company:</strong>
+                    <span th:text="${job.recruiter.companyName}"></span>
+                </div>
+                <div class="job-detail">
+                    <strong>Package:</strong>
+                    <span th:text="${job.ctc}+' LPA'"></span>
+                </div>
+                <div class="job-detail">
+                    <strong>Description:</strong>
+                    <span th:text="${job.description}"></span>
+                </div>
+                <div class="job-detail">
+                    <strong>Experience:</strong>
+                    <span th:text="${job.experience}+' months'"></span>
+                </div>
+                <div class="job-detail">
+                    <strong>Skills:</strong>
+                    <span th:text="${job.skills}"></span>
+                </div>
+                <div class="job-detail">
+                    <strong>Location:</strong>
+                    <span th:text="${job.location}"></span>
+                </div>
+                
+                <div class="action-buttons">
+                    <a th:href="'/recruiter/application/'+${job.id}" class="action-btn edit-btn">
+                        <i class="fas fa-edit"></i> View Applications
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/about-us">About Us</a>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const alerts = document.querySelectorAll('.alert-message');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.display = 'none';
+                }, 2000);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

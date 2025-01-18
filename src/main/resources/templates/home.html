@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Job Portal - Find your dream job opportunities across various industries">
+  <meta name="keywords" content="jobs, career, employment, job search, job portal, hiring, job opportunities">
+  <meta name="author" content="Job Portal">
+  <meta name="robots" content="index, follow">
+
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <title>Job Portal - Find Your Dream Job Today</title>
+
+  <style>
+    :root {
+      --primary-color: #6c63ff;
+      --secondary-color: #ff6584;
+      --dark-color: #2d3436;
+      --light-color: #f5f6fa;
+      --gray-color: #dfe6e9;
+      --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      background: linear-gradient(135deg, #e3e8ed, #d1dff0);
+      background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    .navbar {
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95));
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: var(--primary-color);
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-btn {
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .register-btn {
+      background: linear-gradient(135deg, var(--primary-color), #8278ff);
+      color: white;
+    }
+
+    .register-btn:hover {
+      background: linear-gradient(135deg, var(--secondary-color), #ff7a96);
+      transform: translateY(-2px);
+    }
+
+    .login-btn {
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .login-btn:hover {
+      background: linear-gradient(135deg, var(--primary-color), #8278ff);
+      color: white;
+    }
+
+    .hero-section {
+      min-height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8));
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+    }
+
+    .hero-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-title {
+      color: #ffffff;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-subtitle {
+      color: #ffffff;
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      opacity: 0.9;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .search-box {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1.5rem;
+      border-radius: 12px;
+      width: 100%;
+      display: flex;
+      gap: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border: 2px solid var(--gray-color);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+
+    .search-btn {
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary-color), #8278ff);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .search-btn:hover {
+      background: linear-gradient(135deg, var(--secondary-color), #ff7a96);
+      transform: translateY(-2px);
+    }
+
+    .alert-message {
+      position: fixed;
+      top: 90px;
+      right: 20px;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      z-index: 1001;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .success {
+      background: linear-gradient(135deg, #00b894, #00d1a0);
+      color: white;
+    }
+
+    .error {
+      background: linear-gradient(135deg, #ff7675, #ff9b9b);
+      color: white;
+    }
+
+    .alert-close {
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .alert-close:hover {
+      opacity: 1;
+    }
+
+    .footer {
+      background: linear-gradient(135deg, var(--dark-color), #3d4246);
+      color: var(--light-color);
+      padding: 3rem 5%;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+    }
+
+    .footer-links a {
+      color: var(--light-color);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+      color: var(--secondary-color);
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .nav-buttons {
+        gap: 0.8rem;
+      }
+
+      .nav-btn {
+        padding: 0.6rem 1.5rem;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <a href="/" style="display: flex; align-items: center;">
+        <img src="/assets/favicon.png" alt="Job Portal Logo" style="width: 30px; height: 30px; margin-right: 10px;">
+        Job Portal
+      </a>
+    </div>
+    <div class="nav-buttons">
+      <a href="/login"><button class="nav-btn login-btn">Login</button></a>
+      <a href="/jobseeker/register"><button class="nav-btn register-btn">Register</button></a>
+    </div>
+  </nav>
+
+  <div th:if="${session.success}" class="alert-message success">
+    <span th:text="${session.success}"></span>
+    <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+    <th:block th:text="${@messageRemover.remove()}"></th:block>
+  </div>
+  <div th:if="${session.error}" class="alert-message error">
+    <span th:text="${session.error}"></span>
+    <button class="alert-close" onclick="this.parentElement.style.display='none'">×</button>
+    <th:block th:text="${@messageRemover.remove()}"></th:block>
+  </div>
+
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Find Your Dream Job Today</h1>
+      <p class="hero-subtitle">Search through thousands of job listings to find your perfect match</p>
+      <form action="/search-jobs" method="post">
+        <div class="search-box">
+          <input type="text" class="search-input" name="query" placeholder="Search jobs..." required>
+          <button type="submit" class="search-btn">
+            <i class="fas fa-search"></i>
+            Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="/about-us">About Us</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    setTimeout(function () {
+      const alertMessages = document.querySelectorAll('.alert-message');
+      alertMessages.forEach(message => {
+        message.style.display = 'none';
+      });
+    }, 2000);
+  </script>
+</body>
+
+</html>
